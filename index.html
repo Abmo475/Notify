@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head><style>
+* {
+      padding: 0px;
+      margin: 0px;
+      overflow:hidden;
+      font-family: 'Lobster Two';
+}
+.main-wrapper {
+      width: 100vw;
+      height: 100vh;
+      background-color: #e0e0e0;
+      padding-top: 50px;
+}
+h2,
+h3,
+p {
+      text-align: center;
+}
+button
+{
+      width:100px;
+      height:40px;
+      font-size:20px;
+      background-color:#f1f1f1;
+      border:2px solid #ffcc00;
+      cursor:pointer;
+}
+button:hover
+{
+      background-color:#ffcc00;
+      border:2px solid #000;  
+}
+</style>
+</head>
+<body>
+<div class="main-wrapper">
+      <h2>Desktop Notification</h2>
+      <br>
+      <p>Simply click on the Yellow Bordered button on the bottom to trigger Notifications!</p>
+      <br>
+      <center><button id="dntrigger">Click</button></center>
+</div>
+<script>
+var dntrigger = document.getElementById('dntrigger');
+
+dntrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      if (!window.Notification) {
+            alert("Sorry, Notification Not supported in this Browser!");
+      } else {
+            if (Notification.permission === 'default') {
+                  Notification.requestPermission(function(p) {
+                        if (p === 'denied')
+                              alert('You have denied Notification from Ebidir');
+                        else {
+                                notify = new Notification('Loan Application Updates!', {
+                        body: 'Congratulations Your loan has been approved!"',
+                        icon: 'https://img.icons8.com/?size=512&id=84992&format=png'  
+                  });
+                  notify.onclick = (event) => {
+  event.preventDefault();
+  window.open("http://www.mozilla.org", "_blank"); // change with your custom link
+};
+                        }
+                  });
+            } else {
+                  notify = new Notification('Loan Application Updates!', {
+                      body: 'Congratulations Your loan has been approved!"',
+                        icon: 'https://img.icons8.com/?size=512&id=84992&format=png'  
+                  });
+                  notify.onclick = (event) => {
+  event.preventDefault();
+  window.open("http://www.mozilla.org", "_blank");// change with your custom link
+};
+            }
+      }
+});
+</script>
+</body>
+
+</html>
